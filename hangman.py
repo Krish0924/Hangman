@@ -13,7 +13,7 @@ def ldetetcion(letter):
         return False
 
 def display(letters):
-    underscores = ["_" for _ in range(5)]
+    underscores = ["_" for _ in range(len(word))]
     global bodyPartsLost
     bodyPartsLost = 0
 
@@ -33,24 +33,28 @@ def display(letters):
     else:
         return False
 
-letters = []
+letters = set()
 
-while bodyPartsLost <= 7:
+stickman = [
+    colored(" O", "green") + "\n" + colored("/", "green") + colored("|", "green") + colored("\\", "green") + "\n" + colored("/ ", "green") + colored("\\", "green"),
+    colored(" O", "green") + "\n" + colored("/", "green") + colored("|", "green") + colored("\\", "green") + "\n" + colored("/ ", "green") + colored("\\", "red"),
+    colored(" O", "green") + "\n" + colored("/", "green") + colored("|", "green") + colored("\\", "green") + "\n" + colored("/ ", "red") + colored("\\", "red"),
+    colored(" O", "green") + "\n" + colored("/", "green") + colored("|", "green") + colored("\\", "red") + "\n" + colored("/ ", "red") + colored("\\", "red"),
+    colored(" O", "green") + "\n" + colored("/", "green") + colored("|", "red") + colored("\\", "red") + "\n" + colored("/ ", "red") + colored("\\", "red"),
+    colored(" O", "green") + "\n" + colored("/", "red") + colored("|", "red") + colored("\\", "red") + "\n" + colored("/ ", "red") + colored("\\", "red"),
+    colored(" O", "red") + "\n" + colored("/", "red") + colored("|", "red") + colored("\\", "red") + "\n" + colored("/ ", "red") + colored("\\", "red")
+]
+
+while bodyPartsLost < 6:
     print("Try to figure out this word!")
     letter = input("Type a letter: ")
     while not ldetetcion(letter):
         print("That is not a letter. Try again.")
         letter = input("Type a letter: ")
-    letters.append(letter)
+    letters.add(letter)
     hasWon = display(letters)
     if hasWon:
         break
-    print("You have lost " + colored(str(bodyPartsLost), "red") + " body parts out of " + colored("7", "green"))
+    print(stickman[bodyPartsLost])
 
-# Possible changes:
-    # "you have lost 8 body parts out of 7"
-    # Guessing same letter multiple times
-
-    # Make printing of underscores prettier
-    # Colors (you can look up termcolor)
-    # deal with guesses of multiple letters or no letters or numbers
+#deal with spaces
